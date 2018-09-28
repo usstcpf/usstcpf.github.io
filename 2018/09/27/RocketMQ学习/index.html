@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="初见">
 <meta property="og:description" content="今天来学一下RocketMQ 架构RocketMQ分为四个角色： Producer、 Consumer、 Broker 和 NameServer  NameServer 负责维护状态信息。集群中各个组件通过Nameserver了解全局信息并定期向NameServer上报自己的状态。 Broker 负责存储、传输消息 Producer 负责发送消息 Consumer 负责接受消息，多个Consume">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-27T13:34:41.410Z">
+<meta property="og:updated_time" content="2018-09-28T09:24:20.491Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RocketMQ学习">
 <meta name="twitter:description" content="今天来学一下RocketMQ 架构RocketMQ分为四个角色： Producer、 Consumer、 Broker 和 NameServer  NameServer 负责维护状态信息。集群中各个组件通过Nameserver了解全局信息并定期向NameServer上报自己的状态。 Broker 负责存储、传输消息 Producer 负责发送消息 Consumer 负责接受消息，多个Consume">
@@ -354,12 +354,24 @@
                 
               
 
-              <time title="创建时间：2018-09-27 21:11:57 / 修改时间：21:34:41" itemprop="dateCreated datePublished" datetime="2018-09-27T21:11:57+08:00">2018-09-27</time>
+              <time title="创建时间：2018-09-27 21:11:57" itemprop="dateCreated datePublished" datetime="2018-09-27T21:11:57+08:00">2018-09-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-28 17:24:20" itemprop="dateModified" datetime="2018-09-28T17:24:20+08:00">2018-09-28</time>
               
             
           </span>
@@ -440,6 +452,7 @@
 <li>Consumer 负责接受消息，多个Consumer组成一个消费者组</li>
 <li>所有角色均可以集群部署</li>
 </ul>
+<a id="more"></a>
 <h1 id="在本机启动RocketMQ"><a href="#在本机启动RocketMQ" class="headerlink" title="在本机启动RocketMQ"></a>在本机启动RocketMQ</h1><h1 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h1><p>消费方式分为两种：</p>
 <ol>
 <li>BROADCASTING 广播模式，即所有的消费者可以消费同样的消息 </li>

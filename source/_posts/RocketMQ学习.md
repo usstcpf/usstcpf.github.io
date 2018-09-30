@@ -36,13 +36,13 @@ RocketMQ分为四个角色： Producer、 Consumer、 Broker 和 NameServer
 
 启动类是`org.apache.rocketmq.broker.BrokerStartup`，但如果直接启动该类，会报错`Please set the ROCKETMQ_HOME variable in your environment to match the location of the RocketMQ installation`，需要做一些初始化操作才可以正常启动
 
-1. 在createBrokerController方法中设置rocketmqHome ```brokerConfig.setRocketmqHome("D:\\workspace\\ideaworkspace\\RocketMQ-iqiyi\\distribution");```
-1. 在distribution\conf\broker.conf中添加一行配置 ```brokerIP1={yourIP}```
-1. 通过 ```-c D:\workspace\ideaworkspace\RocketMQ\distribution\conf\broker.conf``` 指定配置文件路径
-1. broker启动需要指定nameServer的地址，可以在BrokerStartup中设置```brokerConfig.setNamesrvAddr```，或者通过命令行参数 ```-n yournameserverAddress:port```，或者在broker.conf配置文件中配置```namesrvAddr={yournamesrvAddr}```
+1. 在createBrokerController方法中设置rocketmqHome `brokerConfig.setRocketmqHome("D:\\workspace\\ideaworkspace\\RocketMQ-iqiyi\\distribution");`
+1. 在distribution\conf\broker.conf中添加一行配置 `brokerIP1={yourIP}`
+1. 通过 `-c D:\workspace\ideaworkspace\RocketMQ\distribution\conf\broker.conf` 指定配置文件路径
+1. broker启动需要指定nameServer的地址，可以在BrokerStartup中设置`brokerConfig.setNamesrvAddr`，或者通过命令行参数 `-n yournameserverAddress:port`，或者在broker.conf配置文件中配置`namesrvAddr={yournamesrvAddr}`
 1. 接下来直接启动BrokerStartup即可
 
-**注意** 如果不做第2、3步，极有可能在生产和消费的时候报错```connect to XXXX:10909 failed```
+**注意** 如果不做第2、3步，极有可能在生产和消费的时候报错`connect to XXXX:10909 failed`
 
 # 消费
 
@@ -73,9 +73,9 @@ RocketMQ中的消费是以消费者组的形式来进行的，一个或多个消
 
 ### DefaultMQPushConsumer
 
-首先看一下DefaultMQPushConsumer的使用，查看```org.apache.rocketmq.example.quickstart```下面的Consumer类
+首先看一下DefaultMQPushConsumer的使用，查看`org.apache.rocketmq.example.quickstart`下面的Consumer类
 
-```
+```java
 public class Consumer {
     public static void main(String[] args) throws InterruptedException, MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_4");
@@ -98,18 +98,18 @@ public class Consumer {
 ```
 
 - 必须设定consumerGroupName
-- 必须指定topic，可以通过```consumer.subscribe("TopicTest", "tag1 || tag2 || tag3")```过滤tag。null或*表示不过滤，消费所有信息。
+- 必须指定topic，可以通过`consumer.subscribe("TopicTest", "tag1 || tag2 || tag3")`过滤tag。null或*表示不过滤，消费所有信息。
 - 必须指定NameServer地址
-- 可以指定从特定位置消费，默认```ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET```，具体规则见[消费位置](#消费位置)
-- 可以指定消费模式，默认为```MessageModel.CLUSTERING```
+- 可以指定从特定位置消费，默认`ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET`，具体规则见[消费位置](#消费位置)
+- 可以指定消费模式，默认为`MessageModel.CLUSTERING`
 
 查看DefaultMQPushConsumer代码可以看到它的所有具体实现都是由DefaultMQPullConsumerImpl实现的
 
 ### DefaultMQPullConsumer
 
-再来看DefaultMQPullConsumer的使用，查看```org.apache.rocketmq.example.simple```下面的PullConsumer类
+再来看DefaultMQPullConsumer的使用，查看`org.apache.rocketmq.example.simple`下面的PullConsumer类
 
-```
+```java
 public class PullConsumer {
     private static final Map<MessageQueue, Long> OFFSE_TABLE = new HashMap<MessageQueue, Long>();
     public static void main(String[] args) throws MQClientException {
@@ -158,7 +158,7 @@ public class PullConsumer {
 
 ## 没分类的
 
-MQClientInstance负责与Broker联系，处于生产者和消费者的底层。生产者和消费者都需要创建MQClientInstance，一般连接同一个rocketMQ只会创建一个MQClientInstance，也就是在同一个JVM，默认多个Producer和Consumer公用一个MQClientInstance。在连接多个RocketMQ时，一定要手动指定不同的InstanceName，底层会创建多个MQClientInstance对象，设定方法为```producer.setInstanceName("");```或 ```consumer.setInstanceName("");```
+MQClientInstance负责与Broker联系，处于生产者和消费者的底层。生产者和消费者都需要创建MQClientInstance，一般连接同一个rocketMQ只会创建一个MQClientInstance，也就是在同一个JVM，默认多个Producer和Consumer公用一个MQClientInstance。在连接多个RocketMQ时，一定要手动指定不同的InstanceName，底层会创建多个MQClientInstance对象，设定方法为`producer.setInstanceName("");`或 `consumer.setInstanceName("");`
 
 
 # 参考资料

@@ -37,9 +37,12 @@ RocketMQ分为四个角色： Producer、 Consumer、 Broker 和 NameServer
 启动类是`org.apache.rocketmq.broker.BrokerStartup`，但如果直接启动该类，会报错`Please set the ROCKETMQ_HOME variable in your environment to match the location of the RocketMQ installation`，需要做一些初始化操作才可以正常启动
 
 1. 在createBrokerController方法中设置rocketmqHome `brokerConfig.setRocketmqHome("D:\\workspace\\ideaworkspace\\RocketMQ-iqiyi\\distribution");`
-1. 在distribution\conf\broker.conf中添加一行配置 `brokerIP1={yourIP}`
+1. 在distribution\conf\broker.conf中添加两行配置
+    ```java
+      brokerIP1={yourIP}
+      namesrvAddr={yourNameserverAddress}
+    ```
 1. 通过 `-c D:\workspace\ideaworkspace\RocketMQ\distribution\conf\broker.conf` 指定配置文件路径
-1. broker启动需要指定nameServer的地址，可以在BrokerStartup中设置`brokerConfig.setNamesrvAddr`，或者通过命令行参数 `-n yournameserverAddress:port`，或者在broker.conf配置文件中配置`namesrvAddr={yournamesrvAddr}`
 1. 接下来直接启动BrokerStartup即可
 
 **注意** 如果不做第2、3步，极有可能在生产和消费的时候报错`connect to XXXX:10909 failed`
